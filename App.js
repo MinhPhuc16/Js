@@ -80,9 +80,9 @@ class NameControl extends React.Component {
     const isWritten = this.state.isWritten;
     let button;
     if (isWritten) {
-      button = <NameButton onClick={this.handleLogoutClick} />;
+      button = <NameButton onClick={this.handleLNameClick} />;
     } else {
-      button = <NonameButton onClick={this.handleLoginClick} />;
+      button = <NonameButton onClick={this.handleClick} />;
     }
 
     return (
