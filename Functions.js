@@ -1,6 +1,5 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
-import NumericInput from "react-native-numeric-input";
 import {
   StyleSheet,
   Text,
@@ -13,9 +12,15 @@ export default function App() {
   console.log("App executed");
   const [name, setName] = useState("");
   const [checked, setChecked] = useState(false);
-
+  const [count, setCount] = useState(0);
   const Click = () => {
     setChecked(checked ? false : true);
+  };
+  const ageUp = () => {
+    setCount((Count) => Count + 1);
+  };
+  const ageDown = () => {
+    setCount((Count) => Count - 1);
   };
   return (
     <View style={styles.container}>
@@ -24,22 +29,35 @@ export default function App() {
         onChangeText={(text) => setName(text)}
         style={styles.nameInput}
         placeholder="Nhập họ và tên"
-        keyboardType="numeric"
       ></TextInput>
 
       <Text style={styles.age}>Tuổi: </Text>
-      <NumericInput
-        style={styles.ageInput}
-        type="plus-minus"
-        minValue={0}
-        onChange={(value) => console.log(value)}
-      />
+
+      <View
+        style={{
+          marginTop: 50,
+          width: 50,
+          height: 50,
+          flexDirection: "row",
+        }}
+      >
+        <TouchableOpacity style={styles.click} onPress={ageDown}>
+          <Text style={styles.text}> - </Text>
+        </TouchableOpacity>
+
+        <Text style={styles.counts}>{count}</Text>
+
+        <TouchableOpacity style={styles.click} onPress={ageUp}>
+          <Text style={styles.text}> + </Text>
+        </TouchableOpacity>
+      </View>
       <View>
-        <Text>{checked ? name : ""}</Text>
+        <Text>{checked ? name + " is " + count : "Bạn chưa nhập tên"}</Text>
       </View>
 
-      <TouchableOpacity onPress={() => Click()}>
-        <Text> Ok</Text>
+      <TouchableOpacity onPress={Click}>
+      <Text>Ok</Text>
+        
       </TouchableOpacity>
 
       <StatusBar style="auto" />
@@ -49,7 +67,6 @@ export default function App() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     backgroundColor: "#fff",
     justifyContent: "center",
     flexDirection: "column",
@@ -65,16 +82,26 @@ const styles = StyleSheet.create({
   nameInput: {
     fontWeight: "100",
     fontSize: 24,
-    marginBottom: 10,
+    
   },
   age: {
     fontWeight: "100",
     fontSize: 24,
+    marginTop: 20,
   },
   button: {
     alignItems: "center",
     backgroundColor: "#DDDDDD",
     padding: 10,
-    marginTop: 10,
   },
+  counts: {
+    fontSize: 25,
+  },
+  click: {
+    fontSize: 2,
+    padding: 10,
+  },
+  text: {
+    fontSize: 20,
+  }
 });
