@@ -5,21 +5,13 @@ import { View, StyleSheet } from "react-native";
 import App from "./Functions";
 import Images from "./Image";
 
-const Container = () => {
-  return <View style={styles.container}></View>;
-};
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});
 
 const Screen = () => {
   return (
-    <Container>
+    <View>
       <Images />
       <App />
-    </Container>
+    </View>
   );
 };
 
